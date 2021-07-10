@@ -55,6 +55,9 @@ module.exports = {
 			title: "Hot Module Replacement",
 			templateContent: `
 			<html>
+			<header>
+			<meta name="viewport" content="width=device-width, initial-scale=1">
+			</header>
 				<body>
 					<div id="root"></div>
 				</body>
