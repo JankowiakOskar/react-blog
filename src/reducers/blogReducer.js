@@ -1,6 +1,18 @@
 const initialState = {
-	posts: [],
-	comments: [],
+	posts: {
+		data: [],
+		areLoading: false,
+		error: {
+			message: "",
+		},
+	},
+	comments: {
+		data: [],
+		areLoading: false,
+		error: {
+			message: "",
+		},
+	},
 };
 
 export const blogReducer = (state = initialState, action) => {
