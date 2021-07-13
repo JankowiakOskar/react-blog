@@ -1,12 +1,18 @@
 import React from "react";
 import Heading from "../../components/Heading/Heading";
 import ArticlesContainer from "../../containers/ArticlesContainer/ArticlesContainer";
+import styles from "./Home.module.css";
 
 const Home = () => {
 	return (
-		<div>
-			<Heading title="Our newest articles" />
-			<ArticlesContainer />
+		<div className={styles["wrapper"]}>
+			<Heading title="Blog" />
+			<main className={styles["main-content"]}>
+				<h2 className={styles["main-content__heading"]}>Our Newest Articles</h2>
+				<section className={styles["main-content__section-articles"]}>
+					<ArticlesContainer />
+				</section>
+			</main>
 		</div>
 	);
 };

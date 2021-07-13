@@ -1,5 +1,5 @@
 export const route = {
 	home: "/",
 	articles: "/articles",
-	article: "/article/:id",
+	article: "/articles/:id",
 };

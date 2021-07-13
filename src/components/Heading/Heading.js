@@ -1,9 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
+import styles from "./Heading.module.css";
 
 const Heading = ({ title, subTitle = "" }) => {
 	return (
-		<header>
+		<header className={styles["header"]}>
 			<h1>{title}</h1>
 			{subTitle && <p>{subTitle}</p>}
 		</header>
