@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useArticle } from "../../hooks/useArticle";
-import ArticleView from "../../components/ArticleView/Article";
+import ArticleView from "../../components/ArticleView/ArticleView";
 import LoaderProvider from "../../providers/LoaderProvider";
 
 const ArticleControl = () => {
