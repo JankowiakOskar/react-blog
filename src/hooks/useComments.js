@@ -18,7 +18,7 @@ export const useComments = ({ articleId }) => {
     return () => {
       controller.abort();
     };
-  }, []);
+  }, [articleId]);
 
   return {
     articleComments,

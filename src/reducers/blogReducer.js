@@ -8,22 +8,22 @@ import {
   GET_ARTICLE_COMMENTS_REQUEST,
   GET_ARTICLE_COMMENTS_SUCCESS,
   GET_ARTICLE_COMMENTS_FAILURE,
+  ADD_COMMENT_REQUEST,
+  ADD_COMMENT_SUCCESS,
+  ADD_COMMENT_FAILURE,
 } from '../actions/actionTypes';
 
 export const initialState = {
   articles: {
     data: [],
     areLoading: false,
-    error: {
-      message: '',
-    },
+    error: { message: '' },
   },
   comments: {
     data: [],
     areLoading: false,
-    error: {
-      message: '',
-    },
+    error: { message: '' },
+    isCommentSubmitting: false,
   },
 };
 
@@ -34,7 +34,7 @@ export const blogReducer = (state = initialState, action) => {
         ...state,
         articles: {
           ...state.articles,
-          areLoading: true,
+          areLoading: !state.articles.areLoading,
         },
       };
     case FETCH_ALL_ARTICLES_SUCCESS:
@@ -43,7 +43,7 @@ export const blogReducer = (state = initialState, action) => {
         articles: {
           ...state.articles,
           data: [...action.payload],
-          areLoading: false,
+          areLoading: !state.articles.areLoading,
         },
       };
     case FETCH_ALL_ARTICLES_FAILURE:
@@ -51,7 +51,7 @@ export const blogReducer = (state = initialState, action) => {
         ...state,
         articles: {
           ...state.articles,
-          areLoading: false,
+          areLoading: !state.articles.areLoading,
           error: { message: action.payload },
         },
       };
@@ -60,7 +60,7 @@ export const blogReducer = (state = initialState, action) => {
         ...state,
         articles: {
           ...state.articles,
-          areLoading: true,
+          areLoading: !state.articles.areLoading,
         },
       };
     case FETCH_ARTICLE_SUCCESS:
@@ -69,7 +69,7 @@ export const blogReducer = (state = initialState, action) => {
         articles: {
           ...state.articles,
           data: [...state.articles.data, action.payload],
-          areLoading: false,
+          areLoading: !state.articles.areLoading,
         },
       };
     case FETCH_ARTICLE_FAILURE:
@@ -77,7 +77,7 @@ export const blogReducer = (state = initialState, action) => {
         ...state,
         articles: {
           ...state.articles,
-          areLoading: false,
+          areLoading: !state.articles.areLoading,
           error: { message: action.payload },
         },
       };
@@ -86,7 +86,7 @@ export const blogReducer = (state = initialState, action) => {
         ...state,
         comments: {
           ...state.comments,
-          areLoading: true,
+          areLoading: !state.comments.areLoading,
         },
       };
     case GET_ARTICLE_COMMENTS_SUCCESS:
@@ -95,7 +95,7 @@ export const blogReducer = (state = initialState, action) => {
         comments: {
           ...state.comments,
           data: action.payload,
-          areLoading: false,
+          areLoading: !state.comments.areLoading,
         },
       };
     case GET_ARTICLE_COMMENTS_FAILURE:
@@ -103,10 +103,39 @@ export const blogReducer = (state = initialState, action) => {
         ...state,
         comments: {
           ...state.comments,
-          areLoading: false,
+          areLoading: !state.comments.areLoading,
           error: { message: action.payload },
         },
       };
+    case ADD_COMMENT_REQUEST: {
+      return {
+        ...state,
+        comments: {
+          ...state.comments,
+          isCommentSubmitting: !state.comments.isCommentSubmitting,
+        },
+      };
+    }
+    case ADD_COMMENT_SUCCESS: {
+      return {
+        ...state,
+        comments: {
+          ...state.comments,
+          data: [...state.comments.data, action.payload],
+          isCommentSubmitting: !state.comments.isCommentSubmitting,
+        },
+      };
+    }
+    case ADD_COMMENT_FAILURE: {
+      return {
+        ...state,
+        comments: {
+          ...state.comments,
+          error: { message: action.payload },
+          isCommentSubmitting: !state.comments.isCommentSubmitting,
+        },
+      };
+    }
     default:
       return state;
   }

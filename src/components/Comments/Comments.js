@@ -4,8 +4,12 @@ import Comment from '../Comment/Comment';
 
 const Comments = ({ comments }) => (
   <>
-    {comments.map(({ id, email, body }) => (
-      <Comment key={`${id}`} author={email} content={body} />
+    {comments.map(({ id, email, name, body }, index) => (
+      <Comment
+        key={`${id + index}`}
+        author={email ? email : name}
+        content={body}
+      />
     ))}
   </>
 );
@@ -20,8 +24,6 @@ Comments.propTypes = {
   ),
 };
 
-Comments.defaultProps = {
-  comments: [],
-};
+Comments.defaultProps = { comments: [] };
 
 export default Comments;
