@@ -5,6 +5,9 @@ import {
   FETCH_ARTICLE_REQUEST,
   FETCH_ARTICLE_SUCCESS,
   FETCH_ARTICLE_FAILURE,
+  UPDATE_ARTICLE_REQUEST,
+  UPDATE_ARTICLE_SUCCESS,
+  UPDATE_ARTICLE_FAILURE,
   GET_ARTICLE_COMMENTS_REQUEST,
   GET_ARTICLE_COMMENTS_SUCCESS,
   GET_ARTICLE_COMMENTS_FAILURE,
@@ -51,6 +54,36 @@ export const fetchArticleById = (controller, id) => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: FETCH_ARTICLE_FAILURE,
+      payload: err.message,
+    });
+  }
+};
+
+export const updateArticle = (id, newData) => async (dispatch, getState) => {
+  dispatch({ type: UPDATE_ARTICLE_REQUEST });
+  const {
+    articles: { data: currArticles },
+  } = getState();
+  const articleToUpdate = currArticles.find((article) => article.id === +id);
+  const updatedArticle = { ...articleToUpdate, ...newData };
+  try {
+    const response = await fetch(`${BLOG_API}/posts/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(updatedArticle),
+      headers: { 'Content-type': 'application/json; charset=UTF-8' },
+    });
+
+    const validResponse = errorHandler(response);
+
+    const articleFromServer = await validResponse.json();
+    console.log(articleFromServer);
+    dispatch({
+      type: UPDATE_ARTICLE_SUCCESS,
+      payload: { id: articleFromServer.id, updatedArticle: articleFromServer },
+    });
+  } catch (err) {
+    dispatch({
+      type: UPDATE_ARTICLE_FAILURE,
       payload: err.message,
     });
   }

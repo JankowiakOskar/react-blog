@@ -5,25 +5,29 @@ import {
   FETCH_ARTICLE_REQUEST,
   FETCH_ARTICLE_SUCCESS,
   FETCH_ARTICLE_FAILURE,
+  UPDATE_ARTICLE_REQUEST,
+  UPDATE_ARTICLE_SUCCESS,
+  UPDATE_ARTICLE_FAILURE,
   GET_ARTICLE_COMMENTS_REQUEST,
   GET_ARTICLE_COMMENTS_SUCCESS,
   GET_ARTICLE_COMMENTS_FAILURE,
   ADD_COMMENT_REQUEST,
   ADD_COMMENT_SUCCESS,
   ADD_COMMENT_FAILURE,
-} from '../actions/actionTypes';
+} from 'actions/actionTypes';
 
 export const initialState = {
   articles: {
     data: [],
     areLoading: false,
+    isArticleUpdating: false,
     error: { message: '' },
   },
   comments: {
     data: [],
     areLoading: false,
-    error: { message: '' },
     isCommentSubmitting: false,
+    error: { message: '' },
   },
 };
 
@@ -81,6 +85,39 @@ export const blogReducer = (state = initialState, action) => {
           error: { message: action.payload },
         },
       };
+    case UPDATE_ARTICLE_REQUEST: {
+      return {
+        ...state,
+        articles: {
+          ...state.articles,
+          isArticleUpdating: !state.articles.isArticleUpdating,
+        },
+      };
+    }
+    case UPDATE_ARTICLE_SUCCESS: {
+      const { id, updatedArticle } = action.payload;
+      return {
+        ...state,
+        articles: {
+          ...state.articles,
+          data: [
+            ...state.articles.data.filter((article) => article.id !== id),
+            updatedArticle,
+          ],
+          isArticleUpdating: !state.articles.isArticleUpdating,
+        },
+      };
+    }
+    case UPDATE_ARTICLE_FAILURE: {
+      return {
+        ...state,
+        articles: {
+          ...state.articles,
+          error: { message: action.payload },
+          isArticleUpdating: !state.articles.isArticleUpdating,
+        },
+      };
+    }
     case GET_ARTICLE_COMMENTS_REQUEST:
       return {
         ...state,

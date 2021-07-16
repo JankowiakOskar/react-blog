@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classnames from 'classnames';
 import styles from './FormComment.module.css';
 import classNames from 'classnames';
 
@@ -11,10 +10,11 @@ const FormComment = ({
   author,
   commentValue,
   error,
+  isDisabledSubmit,
 }) => (
-  <div>
+  <div className={styles['form-wrapper']}>
     <h3 className={styles['form-wrapper__title']}>Leave your comment</h3>
-    <form onSubmit={onSubmit}>
+    <form className={styles['form']} onSubmit={onSubmit}>
       <div className={styles['form__input-wrapper']}>
         <label className={styles['form__label']} htmlFor="author-comment">
           Author
@@ -43,11 +43,17 @@ const FormComment = ({
           onChange={setComment}
         />
       </div>
-      <button className={styles['form__button']} type="submit">
+      <button
+        className={classNames(styles['form__button'], {
+          [styles['form__button--disabled']]: isDisabledSubmit,
+        })}
+        type="submit"
+        disabled={isDisabledSubmit}
+      >
         Add comment
       </button>
     </form>
-    {error && <span>{error}!</span>}
+    {error && <span className={styles['form__error']}>{error}!</span>}
   </div>
 );
 
@@ -58,6 +64,7 @@ FormComment.propTypes = {
   commentValue: PropTypes.string,
   author: PropTypes.string,
   error: PropTypes.string,
+  isDisabledSubmit: PropTypes.bool.isRequired,
 };
 
 FormComment.defaultProps = {

@@ -1,6 +1,9 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchArticleById } from '../actions/blogActions';
+import {
+  fetchArticleById,
+  updateArticle as updateArticleAction,
+} from 'actions/blogActions';
 
 export const useArticle = ({ articleId }) => {
   const dispatch = useDispatch();
@@ -11,6 +14,9 @@ export const useArticle = ({ articleId }) => {
   const searchedArticle = articlesData.find(
     (article) => String(article.id) === String(articleId),
   );
+
+  const updateArticle = (newData) =>
+    dispatch(updateArticleAction(articleId, newData));
 
   useEffect(() => {
     const controller = new AbortController();
@@ -25,5 +31,6 @@ export const useArticle = ({ articleId }) => {
   return {
     article: searchedArticle,
     isLoading: areFetching,
+    updateArticle,
   };
 };
