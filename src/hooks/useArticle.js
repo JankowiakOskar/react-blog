@@ -1,15 +1,20 @@
 import { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   fetchArticleById,
   updateArticle as updateArticleAction,
 } from 'actions/blogActions';
+import { CLEAR_ARTICLE_ERROR } from 'actions/actionTypes';
 
 export const useArticle = ({ articleId }) => {
   const dispatch = useDispatch();
-  const { data: articlesData, areFetching } = useSelector(
-    (state) => state.articles,
-  );
+  const {
+    data: articlesData,
+    areLoading,
+    error,
+  } = useSelector((state) => state.articles);
+  const history = useHistory();
 
   const searchedArticle = articlesData.find(
     (article) => String(article.id) === String(articleId),
@@ -28,9 +33,19 @@ export const useArticle = ({ articleId }) => {
     };
   }, [searchedArticle]);
 
+  useEffect(() => {
+    if (error.message) {
+      const handleErrorRedirect = () => {
+        dispatch({ type: CLEAR_ARTICLE_ERROR });
+        history.push('/404');
+      };
+      handleErrorRedirect();
+    }
+  }, [error.message]);
+
   return {
     article: searchedArticle,
-    isLoading: areFetching,
+    isLoadingArticle: areLoading,
     updateArticle,
   };
 };

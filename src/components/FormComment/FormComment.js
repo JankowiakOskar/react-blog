@@ -10,7 +10,8 @@ const FormComment = ({
   author,
   commentValue,
   error,
-  isDisabledSubmit,
+  isDisabled,
+  isSubmitting,
 }) => (
   <div className={styles['form-wrapper']}>
     <h3 className={styles['form-wrapper__title']}>Leave your comment</h3>
@@ -45,12 +46,12 @@ const FormComment = ({
       </div>
       <button
         className={classNames(styles['form__button'], {
-          [styles['form__button--disabled']]: isDisabledSubmit,
+          [styles['form__button--disabled']]: isDisabled,
         })}
         type="submit"
-        disabled={isDisabledSubmit}
+        disabled={isDisabled}
       >
-        Add comment
+        {isSubmitting ? 'Adding comment...' : 'add comment'}
       </button>
     </form>
     {error && <span className={styles['form__error']}>{error}!</span>}
@@ -64,7 +65,8 @@ FormComment.propTypes = {
   commentValue: PropTypes.string,
   author: PropTypes.string,
   error: PropTypes.string,
-  isDisabledSubmit: PropTypes.bool.isRequired,
+  isDisabled: PropTypes.bool.isRequired,
+  isSubmitting: PropTypes.bool,
 };
 
 FormComment.defaultProps = {

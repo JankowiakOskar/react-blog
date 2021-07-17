@@ -4,7 +4,9 @@ import { getArticleComments } from 'actions/blogActions';
 
 export const useComments = ({ articleId }) => {
   const dispatch = useDispatch();
-  const { data: commentsData } = useSelector((state) => state.comments);
+  const { data: commentsData, areLoading } = useSelector(
+    (state) => state.comments,
+  );
 
   const articleComments = commentsData.filter(
     ({ postId }) => String(postId) === String(articleId),
@@ -22,5 +24,6 @@ export const useComments = ({ articleId }) => {
 
   return {
     articleComments,
+    areLoadingComments: areLoading,
   };
 };

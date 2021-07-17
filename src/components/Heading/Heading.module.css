@@ -1,3 +1,10 @@
 .header {
-	padding: 2rem 0;
+  padding: 2rem 0;
+}
+
+.header__subtitle {
+  margin: 1rem 0 0 0;
+  color: rgba(31, 28, 28, 0.867);
+  line-height: 3rem;
+  font-weight: normal;
 }

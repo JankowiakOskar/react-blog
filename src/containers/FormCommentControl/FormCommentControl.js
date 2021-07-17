@@ -49,7 +49,7 @@ const FormCommentControl = () => {
   const [state, dispatchComment] = useReducer(commentReducer, initialState);
 
   const { author, commentText, errorMsg } = state;
-  console.log(author);
+
   const isDisabledSubmit =
     errorMsg.length || serverError.message.length || isCommentSubmitting;
 
@@ -82,6 +82,9 @@ const FormCommentControl = () => {
     if (errorMsg) {
       setTimeout(() => dispatchComment({ type: 'CLEAR_ERROR' }), 1500);
     }
+    if (serverError.message) {
+      setTimeout(() => dispatch({ type: CLEAR_COMMENT_ERROR }), 1500);
+    }
   }, [errorMsg, serverError.message]);
 
   return (
@@ -92,7 +95,8 @@ const FormCommentControl = () => {
       setAuthor={handleSettingAuthor}
       onSubmit={handleSubmit}
       error={errorMsg || serverError.message}
-      isDisabledSubmit={isDisabledSubmit}
+      isDisabled={isDisabledSubmit}
+      isSubmitting={isCommentSubmitting}
     />
   );
 };

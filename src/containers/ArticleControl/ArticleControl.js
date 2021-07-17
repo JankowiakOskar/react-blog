@@ -6,10 +6,12 @@ import ArticleView from 'components/ArticleView/ArticleView';
 
 const ArticleControl = () => {
   const { id } = useParams();
-  const { article, isLoading, updateArticle } = useArticle({ articleId: id });
+  const { article, isLoadingArticle, updateArticle } = useArticle({
+    articleId: id,
+  });
 
   return (
-    <LoaderProvider isLoading={isLoading}>
+    <LoaderProvider isLoading={isLoadingArticle}>
       {article ? (
         <ArticleView
           title={article.title}

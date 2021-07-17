@@ -5,7 +5,7 @@ import styles from './Heading.module.css';
 const Heading = ({ title, subTitle }) => (
   <header className={styles.header}>
     <h1>{title}</h1>
-    {subTitle && <p>{subTitle}</p>}
+    {subTitle && <h3 className={styles.header__subtitle}>{subTitle}</h3>}
   </header>
 );
 

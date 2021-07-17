@@ -8,6 +8,8 @@ import {
   UPDATE_ARTICLE_REQUEST,
   UPDATE_ARTICLE_SUCCESS,
   UPDATE_ARTICLE_FAILURE,
+  CLEAR_ARTICLE_ERROR,
+  CLEAR_COMMENT_ERROR,
   GET_ARTICLE_COMMENTS_REQUEST,
   GET_ARTICLE_COMMENTS_SUCCESS,
   GET_ARTICLE_COMMENTS_FAILURE,
@@ -118,6 +120,15 @@ export const blogReducer = (state = initialState, action) => {
         },
       };
     }
+    case CLEAR_ARTICLE_ERROR: {
+      return {
+        ...state,
+        articles: {
+          ...state.articles,
+          error: { message: '' },
+        },
+      };
+    }
     case GET_ARTICLE_COMMENTS_REQUEST:
       return {
         ...state,
@@ -170,6 +181,15 @@ export const blogReducer = (state = initialState, action) => {
           ...state.comments,
           error: { message: action.payload },
           isCommentSubmitting: !state.comments.isCommentSubmitting,
+        },
+      };
+    }
+    case CLEAR_COMMENT_ERROR: {
+      return {
+        ...state,
+        comments: {
+          ...state.comments,
+          error: { message: '' },
         },
       };
     }

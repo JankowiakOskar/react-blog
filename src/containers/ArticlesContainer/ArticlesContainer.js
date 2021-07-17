@@ -6,7 +6,7 @@ import Articles from 'components/Articles/Articles';
 
 const ArticlesContainer = () => {
   const dispatch = useDispatch();
-  const { data: articlesData, areFetching } = useSelector(
+  const { data: articlesData, areLoading } = useSelector(
     (state) => state.articles,
   );
 
@@ -19,7 +19,7 @@ const ArticlesContainer = () => {
   }, []);
 
   return (
-    <LoaderProvider isLoading={areFetching}>
+    <LoaderProvider isLoading={areLoading}>
       <Articles articles={articlesData} />
     </LoaderProvider>
   );

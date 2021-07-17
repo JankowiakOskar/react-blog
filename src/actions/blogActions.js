@@ -8,6 +8,7 @@ import {
   UPDATE_ARTICLE_REQUEST,
   UPDATE_ARTICLE_SUCCESS,
   UPDATE_ARTICLE_FAILURE,
+  CLEAR_ARTICLE_ERROR,
   GET_ARTICLE_COMMENTS_REQUEST,
   GET_ARTICLE_COMMENTS_SUCCESS,
   GET_ARTICLE_COMMENTS_FAILURE,
@@ -15,13 +16,15 @@ import {
   ADD_COMMENT_SUCCESS,
   ADD_COMMENT_FAILURE,
 } from './actionTypes';
-import { errorHandler } from '../utilities/errors';
+import { errorHandler } from 'utilities/errors';
+import { sleeper } from 'utilities/delay';
 
 const BLOG_API = 'https://jsonplaceholder.typicode.com';
 
 export const fetchArticles = (controller) => async (dispatch) => {
   dispatch({ type: FETCH_ALL_ARTICLES_REQUEST });
   try {
+    await sleeper(300);
     const response = await fetch(`${BLOG_API}/posts`, {
       method: 'GET',
       signal: controller.signal,
@@ -43,6 +46,7 @@ export const fetchArticles = (controller) => async (dispatch) => {
 export const fetchArticleById = (controller, id) => async (dispatch) => {
   dispatch({ type: FETCH_ARTICLE_REQUEST });
   try {
+    await sleeper(300);
     const response = await fetch(`${BLOG_API}/posts/${id}`, {
       method: 'GET',
       signal: controller.signal,
@@ -133,7 +137,7 @@ export const addCommentToArticle =
       const validResponse = errorHandler(response);
 
       const createdComment = await validResponse.json();
-      console.log(`Comment after add: ${createdComment}`);
+
       dispatch({
         type: ADD_COMMENT_SUCCESS,
         payload: createdComment,

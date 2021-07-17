@@ -34,6 +34,7 @@
 }
 
 .article__heart-icon:hover {
+  opacity: 0.5;
 }
 
 .article__heart-icon--liked {
