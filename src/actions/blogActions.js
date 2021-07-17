@@ -80,7 +80,7 @@ export const updateArticle = (id, newData) => async (dispatch, getState) => {
     const validResponse = errorHandler(response);
 
     const articleFromServer = await validResponse.json();
-    console.log(articleFromServer);
+
     dispatch({
       type: UPDATE_ARTICLE_SUCCESS,
       payload: { id: articleFromServer.id, updatedArticle: articleFromServer },

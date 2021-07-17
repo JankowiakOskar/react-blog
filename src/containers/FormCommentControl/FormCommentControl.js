@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect } from 'react';
+import React, { useReducer, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { addCommentToArticle } from 'actions/blogActions';
@@ -48,10 +48,14 @@ const FormCommentControl = () => {
   );
   const [state, dispatchComment] = useReducer(commentReducer, initialState);
 
+  const timerRef = useRef(null);
+
   const { author, commentText, errorMsg } = state;
 
   const isDisabledSubmit =
-    errorMsg.length || serverError.message.length || isCommentSubmitting;
+    Boolean(errorMsg.length) ||
+    Boolean(serverError.message.length) ||
+    isCommentSubmitting;
 
   const handleTypingComment = (e) => {
     const { value } = e.target;
@@ -80,11 +84,18 @@ const FormCommentControl = () => {
 
   useEffect(() => {
     if (errorMsg) {
-      setTimeout(() => dispatchComment({ type: 'CLEAR_ERROR' }), 1500);
+      timerRef.current = setTimeout(
+        () => dispatchComment({ type: 'CLEAR_ERROR' }),
+        1500,
+      );
     }
     if (serverError.message) {
-      setTimeout(() => dispatch({ type: CLEAR_COMMENT_ERROR }), 1500);
+      timerRef.current = setTimeout(
+        () => dispatch({ type: CLEAR_COMMENT_ERROR }),
+        1500,
+      );
     }
+    return () => clearTimeout(timerRef.current);
   }, [errorMsg, serverError.message]);
 
   return (
