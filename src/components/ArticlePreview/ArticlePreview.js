@@ -9,7 +9,9 @@ const ArticlePreview = ({ id, title }) => {
 
   return (
     <article className={styles.article}>
-      <h3 className={styles.article__title}>{title}</h3>
+      <h3 className={styles.article__title} data-testid="article-preview-title">
+        {title}
+      </h3>
       <div className={styles['article__row-bar']}>
         <Link className={styles.article__link} to={urlToArticle}>
           Read more

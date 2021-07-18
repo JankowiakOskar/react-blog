@@ -7,10 +7,11 @@ const LoaderProvider = ({ isLoading, children }) =>
 
 LoaderProvider.propTypes = {
   isLoading: PropTypes.bool.isRequired,
-  children: PropTypes.oneOfType([
-    PropTypes.node.isRequired,
-    PropTypes.oneOfType([null]),
-  ]).isRequired,
+  children: PropTypes.node,
+};
+
+LoaderProvider.defaultProps = {
+  children: [],
 };
 
 export default LoaderProvider;

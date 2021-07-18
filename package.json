@@ -8,7 +8,8 @@
     "build": "webpack --mode production",
     "lint": "eslint --ext js,jsx src",
     "lint:fix": "eslint --ext js,jsx src --fix",
-    "format": "prettier-eslint --write \"src/**/*.{js,jsx}\""
+    "format": "prettier-eslint --write \"src/**/*.{js,jsx}\"",
+    "test": "jest --env=jsdom"
   },
   "keywords": [],
   "author": "Oskar Jankowiak",
@@ -20,6 +21,8 @@
     "@babel/preset-react": "^7.14.5",
     "@babel/runtime": "^7.14.6",
     "@svgr/webpack": "^5.5.0",
+    "@testing-library/jest-dom": "^5.14.1",
+    "babel-jest": "^27.0.6",
     "babel-loader": "^8.2.2",
     "babel-plugin-module-resolver": "^4.1.0",
     "css-loader": "^5.2.6",
@@ -33,16 +36,20 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.3.2",
+    "jest": "^27.0.6",
     "prettier-eslint": "^12.0.0",
     "prettier-eslint-cli": "^5.0.1",
+    "react-test-renderer": "^17.0.2",
     "style-loader": "^3.0.0",
     "webpack": "^5.44.0",
     "webpack-cli": "^4.7.2",
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
-    "prop-types": "^15.7.2",
+    "@testing-library/react": "^12.0.0",
     "classnames": "^2.3.1",
+    "jest-css-modules": "^2.1.0",
+    "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.4",
@@ -54,5 +61,14 @@
     "last 1 version",
     "> 1%",
     "IE 10"
-  ]
+  ],
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(css|less|scss|sss|styl)$": "<rootDir>/node_modules/jest-css-modules"
+    },
+    "setupFilesAfterEnv": [
+      "<rootDir>/src/setupTests.js"
+    ],
+    "verbose": true
+  }
 }

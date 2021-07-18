@@ -2,13 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Comment from '../Comment/Comment';
 
-const Comments = ({ comments }) => (
-  <>
-    {comments.map(({ id, email, name, body }, index) => (
-      <Comment key={`${id + index}`} author={email || name} content={body} />
-    ))}
-  </>
-);
+const Comments = ({ comments }) => {
+  if (!comments.length || !comments) {
+    return <p>No comments</p>;
+  }
+  return (
+    <>
+      {comments.map(({ id, email, name, body }, index) => (
+        <Comment key={`${id + index}`} author={email || name} content={body} />
+      ))}
+    </>
+  );
+};
 
 Comments.propTypes = {
   comments: PropTypes.arrayOf(

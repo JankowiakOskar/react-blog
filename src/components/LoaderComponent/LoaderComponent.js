@@ -3,9 +3,7 @@ import PropTypes from 'prop-types';
 import { ReactComponent as Loader } from 'assets/svgs/spinner.svg';
 import styles from './Loader.module.css';
 
-const LoaderComponent = ({
-  loadingmessage = `Wait, we're loading data...`,
-}) => (
+const LoaderComponent = ({ loadingmessage }) => (
   <div className={styles.loader}>
     <Loader className={styles.loader__spinner} />
     <span className={styles.loader__message}>{loadingmessage}</span>
@@ -13,7 +11,11 @@ const LoaderComponent = ({
 );
 
 LoaderComponent.propTypes = {
-  loadingmessage: PropTypes.string.isRequired,
+  loadingmessage: PropTypes.string,
+};
+
+LoaderComponent.defaultProps = {
+  loadingmessage: `Wait, we're loading data...`,
 };
 
 export default LoaderComponent;

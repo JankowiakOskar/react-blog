@@ -2,13 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ArticlePreview from 'components/ArticlePreview/ArticlePreview';
 
-const Articles = ({ articles }) => (
-  <>
-    {articles.map(({ id, title }) => (
-      <ArticlePreview key={`${id}`} id={id} title={title} />
-    ))}
-  </>
-);
+const Articles = ({ articles }) => {
+  if (!articles.length || !articles) {
+    return <p>No articles</p>;
+  }
+  return (
+    <>
+      {articles.map(({ id, title }) => (
+        <ArticlePreview key={`${id}`} id={id} title={title} />
+      ))}
+    </>
+  );
+};
 
 Articles.propTypes = {
   articles: PropTypes.arrayOf(
