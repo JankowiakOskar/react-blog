@@ -1,3 +1,5 @@
+import { errorHandler } from 'utilities/errors';
+import { sleeper } from 'utilities/delay';
 import {
   FETCH_ALL_ARTICLES_REQUEST,
   FETCH_ALL_ARTICLES_SUCCESS,
@@ -8,7 +10,6 @@ import {
   UPDATE_ARTICLE_REQUEST,
   UPDATE_ARTICLE_SUCCESS,
   UPDATE_ARTICLE_FAILURE,
-  CLEAR_ARTICLE_ERROR,
   GET_ARTICLE_COMMENTS_REQUEST,
   GET_ARTICLE_COMMENTS_SUCCESS,
   GET_ARTICLE_COMMENTS_FAILURE,
@@ -16,8 +17,6 @@ import {
   ADD_COMMENT_SUCCESS,
   ADD_COMMENT_FAILURE,
 } from './actionTypes';
-import { errorHandler } from 'utilities/errors';
-import { sleeper } from 'utilities/delay';
 
 const BLOG_API = 'https://jsonplaceholder.typicode.com';
 

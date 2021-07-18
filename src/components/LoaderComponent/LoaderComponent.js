@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from './Loader.module.css';
 import { ReactComponent as Loader } from 'assets/svgs/spinner.svg';
+import styles from './Loader.module.css';
 
 const LoaderComponent = ({
   loadingmessage = `Wait, we're loading data...`,
@@ -12,8 +12,8 @@ const LoaderComponent = ({
   </div>
 );
 
-Loader.propTypes = {
-  loadingmessage: PropTypes.string,
+LoaderComponent.propTypes = {
+  loadingmessage: PropTypes.string.isRequired,
 };
 
 export default LoaderComponent;

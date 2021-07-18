@@ -2,6 +2,7 @@ import React, { useReducer, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { addCommentToArticle } from 'actions/blogActions';
+import { CLEAR_COMMENT_ERROR } from 'actions/actionTypes';
 import FormComment from 'components/FormComment/FormComment';
 
 const initialState = {

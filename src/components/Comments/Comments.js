@@ -5,11 +5,7 @@ import Comment from '../Comment/Comment';
 const Comments = ({ comments }) => (
   <>
     {comments.map(({ id, email, name, body }, index) => (
-      <Comment
-        key={`${id + index}`}
-        author={email ? email : name}
-        content={body}
-      />
+      <Comment key={`${id + index}`} author={email || name} content={body} />
     ))}
   </>
 );

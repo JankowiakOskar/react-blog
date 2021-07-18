@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from './FormComment.module.css';
 import classNames from 'classnames';
+import styles from './FormComment.module.css';
 
 const FormComment = ({
   onSubmit,
@@ -15,9 +15,9 @@ const FormComment = ({
 }) => (
   <div className={styles['form-wrapper']}>
     <h3 className={styles['form-wrapper__title']}>Leave your comment</h3>
-    <form className={styles['form']} onSubmit={onSubmit}>
+    <form className={styles.form} onSubmit={onSubmit}>
       <div className={styles['form__input-wrapper']}>
-        <label className={styles['form__label']} htmlFor="author-comment">
+        <label className={styles.form__label} htmlFor="author-comment">
           Author
         </label>
         <input
@@ -30,7 +30,7 @@ const FormComment = ({
         />
       </div>
       <div className={styles['form__input-wrapper']}>
-        <label className={styles['form__label']} htmlFor="comment-value">
+        <label className={styles.form__label} htmlFor="comment-value">
           Comment
         </label>
         <textarea
@@ -45,16 +45,16 @@ const FormComment = ({
         />
       </div>
       <button
-        className={classNames(styles['form__button'], {
+        className={classNames(styles.form__button, {
           [styles['form__button--disabled']]: isDisabled,
         })}
         type="submit"
         disabled={isDisabled}
       >
-        {isSubmitting ? 'Adding comment...' : 'add comment'}
+        {isSubmitting ? 'Adding comment...' : 'Add comment'}
       </button>
     </form>
-    {error && <span className={styles['form__error']}>{error}!</span>}
+    {error && <span className={styles.form__error}>{error}!</span>}
   </div>
 );
 
@@ -66,7 +66,7 @@ FormComment.propTypes = {
   author: PropTypes.string,
   error: PropTypes.string,
   isDisabled: PropTypes.bool.isRequired,
-  isSubmitting: PropTypes.bool,
+  isSubmitting: PropTypes.bool.isRequired,
 };
 
 FormComment.defaultProps = {
