@@ -47,3 +47,14 @@ $ npm build
 ```
 
 Now app should be prepared in `build` folder, ready and optimalized to deploy!
+
+## Tests
+
+Project includes simple tests for couple components. All tests were prepared with using Jest and React Testing Library.
+To run all prepared tests provide in your terminal command puted below:
+
+```
+$ npm run test
+```
+
+After that you should be able to see all tests logs in your terminal, green ones I hope so 😁.
