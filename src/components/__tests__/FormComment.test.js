@@ -3,8 +3,6 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import FormComment from '../FormComment/FormComment';
 
-// const mockSubmitFn = (cb) => jest.fn(cb);
-
 describe('<FormComment/>', () => {
   let wrapper;
   let testState;
