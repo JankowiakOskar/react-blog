@@ -54,7 +54,11 @@ const FormComment = ({
         {isSubmitting ? 'Adding comment...' : 'Add comment'}
       </button>
     </form>
-    {error && <span className={styles.form__error}>{error}!</span>}
+    {error && (
+      <span id="comment-error" className={styles.form__error}>
+        {error}!
+      </span>
+    )}
   </div>
 );
 
